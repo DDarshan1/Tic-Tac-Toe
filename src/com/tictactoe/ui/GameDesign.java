@@ -1,4 +1,4 @@
-package TicTacToeGame;
+package com.tictactoe.ui;
 
 import java.awt.Color;
 import java.awt.Panel;
