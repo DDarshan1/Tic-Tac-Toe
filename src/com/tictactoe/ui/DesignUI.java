@@ -154,11 +154,11 @@ public class DesignUI {
 		b9.setEnabled(true);
 		
 		if(first.isSelected()){
-			p1.setText("Player1: "+": "+first.getText());
-			p2.setText("Player2: "+": "+second.getText());
+			p1.setText("Player1 "+": "+first.getText());
+			p2.setText("Player2 "+": "+second.getText());
 		}else if(second.isSelected()){
-			p1.setText("Player1: "+": "+second.getText());
-			p2.setText("Player2: "+": "+first.getText());
+			p1.setText("Player1 "+": "+second.getText());
+			p2.setText("Player2 "+": "+first.getText());
 		}
 	}
 
