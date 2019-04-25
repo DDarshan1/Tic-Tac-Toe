@@ -2,28 +2,13 @@ package com.tictactoe.ui;
 
 import java.awt.Color;
 import java.awt.Panel;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
-public class GameDesign {
-	
-	public static void main(String args[])
-	{
-		System.gc();
-		
-		Design obj=new Design();
-		
-		obj.startGame();
-		
-	}
-
-}
-
-final class Design{
+public class DesignUI {
 	static int count=0;
 	
 	private JFrame frame;
@@ -37,8 +22,7 @@ final class Design{
 	
 	private JLabel result=new JLabel();
 	
-	Design()
-	{
+	public DesignUI(){
 		frame=new JFrame("Tic Tac Toe");
 		frame.setVisible(true);
 		frame.setSize(450, 360);
@@ -51,15 +35,14 @@ final class Design{
 		frame.add(panel);
 	}
 	
-	void startGame()
-	{
+	public void startGame(){
 		addButtons();
 		addRadioButtons();
 		selectPlayer();
 		buttonFunction();
 	}
-	private void disableButtons()
-	{
+	
+	private void disableButtons(){
 		b1.setEnabled(false);
 		b2.setEnabled(false);
 		b3.setEnabled(false);
@@ -71,8 +54,7 @@ final class Design{
 		b9.setEnabled(false);
 	}
 	
-	private void addButtons()
-	{
+	private void addButtons(){
 		b1=new JButton();
 		b2=new JButton();
 		b3=new JButton();
@@ -120,8 +102,7 @@ final class Design{
 		panel.add(b9);
 	}
 	
-	private void addRadioButtons()
-	{
+	private void addRadioButtons(){
 		first =new JRadioButton("O");
 		second=new JRadioButton("X");
 		
@@ -154,14 +135,12 @@ final class Design{
 		panel.add(p2);
 	}
 	
-	private void selectPlayer()
-	{
+	private void selectPlayer(){
 		first.addActionListener(ae->{radiobuttonFunctioning();});
 		second.addActionListener(ae->{radiobuttonFunctioning();});
 	}
 	
-	private void radiobuttonFunctioning()
-	{
+	private void radiobuttonFunctioning(){
 		clear();
 		
 		b1.setEnabled(true);
@@ -174,20 +153,16 @@ final class Design{
 		b8.setEnabled(true);
 		b9.setEnabled(true);
 		
-		if(first.isSelected())
-		{
+		if(first.isSelected()){
 			p1.setText("Player1: "+": "+first.getText());
 			p2.setText("Player2: "+": "+second.getText());
-		}
-		else if(second.isSelected())
-		{
+		}else if(second.isSelected()){
 			p1.setText("Player1: "+": "+second.getText());
 			p2.setText("Player2: "+": "+first.getText());
 		}
 	}
 
-	private void buttonFunction()
-	{
+	private void buttonFunction(){
 		b1.addActionListener(ae->{enterSymbolONButton(b1);});
 		b2.addActionListener(ae->{enterSymbolONButton(b2);});
 		b3.addActionListener(ae->{enterSymbolONButton(b3);});
@@ -199,48 +174,32 @@ final class Design{
 		b9.addActionListener(ae->{enterSymbolONButton(b9);});
 	}
 	
-	private void enterSymbolONButton(JButton b)
-	{
+	private void enterSymbolONButton(JButton b){
 		count++;
 		
-		if(b.getText()=="")
-		{
-			if(first.isSelected())
-			{
-				if(count%2==1)
-				{
+		if(b.getText()==""){
+			if(first.isSelected()){
+				if(count%2==1){
 					b.setText(first.getText());
-				}
-				else
-				{
+				}else{
 					b.setText(second.getText());
 				}
-			}
-			else
-			{
-				if(count%2==1)
-				{
+			}else{
+				if(count%2==1){
 					b.setText(second.getText());
-				}
-				else
-				{
+				}else{
 					b.setText(first.getText());
 				}
 			}
-			
-			
 		}
 			
-		if(getResult())
-		{
+		if(getResult()){
 			frame.setEnabled(false);
 			resultFrame();
 		}
-		
 	}
 	
-	private void resultFrame()
-	{
+	private void resultFrame(){
 		JFrame f=new JFrame("Result");
 		f.setVisible(true);
 		f.setSize(450, 200);
@@ -255,8 +214,6 @@ final class Design{
 		JButton no=new JButton("No");
 		
 		JLabel replay=new JLabel("Would like to play again?");
-		
-		
 		
 		yes.setBounds(150,125,50,25);
 		no.setBounds(250, 125, 50, 25);
@@ -275,8 +232,6 @@ final class Design{
 		p.add(result);
 		p.add(replay);
 		
-		
-		
 		yes.addActionListener(ae->{frame.setEnabled(true);
 									clear();
 									f.dispose();});
@@ -284,8 +239,7 @@ final class Design{
 									f.dispose();});
 	}
 	
-	private boolean getResult()
-	{
+	private boolean getResult(){
 		String s[]=new String[9];
 		s[0]=b1.getText();
 		s[1]=b2.getText();
@@ -297,15 +251,13 @@ final class Design{
 		s[7]=b8.getText();
 		s[8]=b9.getText();
 		
-		for(int i=0;i<9;i+=3)
-		{
-			if(s[i]==s[i+1]&&s[i]==s[i+2]&&s[i]!="")
-			{
+		for(int i=0;i<9;i+=3){
+			if(s[i]==s[i+1]&&s[i]==s[i+2]&&s[i]!=""){
 				return checkWinner(s[i]);
 			}
 		}
-		for(int i=0;i<3;i++)
-		{
+		
+		for(int i=0;i<3;i++){
 			if(s[i]==s[i+3]&&s[i]==s[i+6]&&s[i]!="")return checkWinner(s[i]);
 			
 			if(i==0)if(s[i]==s[i+4]&&s[i]==s[i+8]&&s[i]!="")return checkWinner(s[i]);
@@ -313,13 +265,14 @@ final class Design{
 			if(i==2)if(s[i]==s[i+2]&&s[i]==s[i+4]&&s[i]!="")return checkWinner(s[i]);
 		}
 		
-		if(count==9) {result.setText("Match Drawn");return true;}
-		
+		if(count==9) {
+			result.setText("Match Drawn");
+			return true;
+		}
 		return false;
 	}
 	
-	private void clear()
-	{
+	private void clear(){
 		count=0;
 		b1.setText("");
 		b2.setText("");
@@ -334,31 +287,22 @@ final class Design{
 		disableButtons();
 	}
 
-	private boolean checkWinner(String s)
-	{
-		if(first.isSelected())
-		{
-			if(s.equalsIgnoreCase(first.getText()))
-			{
+	private boolean checkWinner(String s){
+		if(first.isSelected()){
+			if(s.equalsIgnoreCase(first.getText())){
 				result.setText("Player1 wins");
 				return true;
-			}
-			else
-			{
+			}else{
 				result.setText("Player2 wins");
 				return true;
 			}
 		}
 		
-		if(second.isSelected())
-		{
-			if(s.equalsIgnoreCase(second.getText()))
-			{
+		if(second.isSelected()){
+			if(s.equalsIgnoreCase(second.getText())){
 				result.setText("Player1 wins");
 				return true;
-			}
-			else
-			{
+			}else{
 				result.setText("Player2 wins");
 				return true;
 			}
